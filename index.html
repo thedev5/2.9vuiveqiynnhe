@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gửi Qiyn — An yên ngày mới</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red-deep:#7A2233;
+    --red-deep-2:#932D3C;
+    --red-bg:#551824;
+    --cream:#FBF2DE;
+    --cream-soft:#F1E1BB;
+    --gold:#C9974C;
+    --gold-light:#E9B23D;
+    --rose:#E8A0A6;
+    --ink:#4A2A28;
+    --ink-soft:#8A6152;
+    --fur:#F0D5AE;
+    --fur-shade:#DCB37E;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+ w   padding:0;
+    min-height:100vh;
+  }
+
+  body{
+    font-family:'Quicksand',sans-serif;
+    background:
+      radial-gradient(circle at 50% -8%, var(--red-deep-2) 0%, var(--red-bg) 55%, #430F19 100%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .card{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    background:var(--cream);
+    border-radius:34px 34px 26px 26px;
+    padding:34px 26px 28px;
+    box-shadow:0 24px 60px rgba(30,6,10,0.45), 0 2px 0 rgba(255,255,255,0.4) inset;
+    overflow:hidden;
+    text-align:center;
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    top:-90px;
+    left:50%;
+    transform:translateX(-50%);
+    width:280px;
+    height:220px;
+    background:radial-gradient(ellipse at center, rgba(233,178,61,0.35) 0%, rgba(233,178,61,0) 70%);
+    pointer-events:none;
+  }
+
+  .eyebrow{
+    position:relative;
+    display:inline-block;
+    font-family:'Comfortaa',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:var(--red-deep);
+    background:var(--cream-soft);
+    border:1px solid rgba(201,151,76,0.4);
+    padding:7px 16px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+
+  .bear-wrap{
+    position:relative;
+    width:210px;
+    height:210px;
+    margin:0 auto 22px;
+  }
+
+  .aura{
+    position:absolute;
+    inset:-26px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(201,151,76,0.38) 0%, rgba(201,151,76,0) 68%);
+    animation:breathe 4.2s ease-in-out infinite;
+  }
+
+  .bear-wrap svg{
+    position:relative;
+    z-index:1;
+    width:100%;
+    height:100%;
+    display:block;
+    filter:drop-shadow(0 10px 18px rgba(122,34,51,0.28));
+  }
+
+  @keyframes breathe{
+    0%,100%{ transform:scale(1); opacity:0.65; }
+    50%{ transform:scale(1.09); opacity:1; }
+  }
+
+  .message{
+    font-family:'Comfortaa',sans-serif;
+    font-weight:600;
+    font-size:17px;
+    line-height:1.65;
+    color:var(--ink);
+    padding:0 2px;
+    margin:0 0 26px;
+  }
+
+  .cta{
+    display:block;
+    width:100%;
+    font-family:'Comfortaa',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.2px;
+    color:var(--cream);
+    background:linear-gradient(135deg, var(--red-deep-2), var(--red-deep));
+    border:none;
+    border-radius:999px;
+    padding:17px 24px;
+    cursor:pointer;
+    box-shadow:0 12px 26px rgba(122,34,51,0.4);
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .cta:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 32px rgba(122,34,51,0.48);
+  }
+
+  .cta:active{
+    transform:translateY(0) scale(0.97);
+    box-shadow:0 8px 18px rgba(122,34,51,0.4);
+  }
+
+  .cta:focus-visible{
+    outline:3px solid var(--gold-light);
+    outline-offset:3px;
+  }
+
+  .quote-box{
+    margin-top:0;
+    background:var(--cream-soft);
+    border:1px solid rgba(201,151,76,0.4);
+    border-radius:20px;
+    text-align:left;
+    max-height:0;
+    opacity:0;
+    padding:0 20px;
+    overflow:hidden;
+    transition:max-height 0.55s ease, opacity 0.5s ease, padding 0.55s ease, margin 0.55s ease;
+  }
+
+  .quote-box.show{
+    max-height:260px;
+    opacity:1;
+    padding:18px 20px;
+    margin-top:18px;
+  }
+
+  .quote-box p{
+    margin:0;
+    font-family:'Quicksand',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--red-deep);
+    position:relative;
+    padding-left:16px;
+  }
+
+  .quote-box p::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:7px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+
+  .footer{
+    margin-top:28px;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+
+  #petal-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:9999;
+  }
+
+  .petal{
+    position:absolute;
+    top:-24px;
+    border-radius:0% 100% 0% 100%;
+    background:linear-gradient(160deg, var(--rose), var(--gold-light));
+    opacity:0.92;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-fill-mode:forwards;
+  }
+
+  .spark{
+    position:absolute;
+    top:-14px;
+    border-radius:50%;
+    background:var(--gold-light);
+    box-shadow:0 0 8px 2px rgba(233,178,61,0.7);
+    opacity:0.95;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-fill-mode:forwards;
+  }
+
+  @keyframes fall{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0.95; }
+    85%{ opacity:0.9; }
+    100%{ transform:translateY(112vh) translateX(var(--drift,0px)) rotate(var(--spin,180deg)); opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .aura{ animation:none; opacity:0.75; }
+    .cta{ transition:none; }
+    .petal,.spark{ animation:none; display:none; }
+  }
+
+  @media (max-width:360px){
+    .card{ padding:28px 18px 24px; border-radius:28px 28px 22px 22px; }
+    .bear-wrap{ width:180px; height:180px; }
+    .message{ font-size:15.5px; }
+  }
+
+  #mand-intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:radial-gradient(circle at 50% 38%,rgba(233,178,61,.18),transparent 30%),linear-gradient(145deg,#430F19,#6E2030 52%,#3C0D17);transition:opacity .75s ease,visibility .75s ease}
+  #mand-intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+  #mand-intro::before{content:"";position:absolute;width:min(72vw,340px);height:min(72vw,340px);border:1px solid rgba(233,178,61,.42);border-radius:50%;box-shadow:0 0 0 10px rgba(233,178,61,.045),0 0 70px rgba(233,178,61,.14)}
+  .mand-inner{position:relative;text-align:center;padding:28px;animation:mandIn 1s ease both}.mand-mark{width:118px;height:118px;margin:0 auto 22px;display:grid;place-items:center;border-radius:50%;color:#F9EBCF;font-family:'Comfortaa',sans-serif;font-size:31px;font-weight:700;border:1px solid rgba(233,178,61,.7);box-shadow:inset 0 0 35px rgba(233,178,61,.08),0 15px 40px rgba(0,0,0,.2);background:radial-gradient(circle,rgba(201,151,76,.18),rgba(85,24,36,.08))}.mand-title{margin:0;color:#FBF2DE;font-family:'Comfortaa',sans-serif;font-size:22px;font-weight:700}.mand-sub{margin:10px 0 0;color:#E9B23D;font-size:13px;letter-spacing:2.5px;text-transform:uppercase}@keyframes mandIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body><div id="mand-intro" aria-label="Mở lời chúc"><div class="mand-inner"><div class="mand-mark" aria-label="Biểu tượng hoa sen">
+        <svg viewBox="0 0 120 90" width="78" height="60" aria-hidden="true">
+          <g fill="none" stroke="#F9EBCF" stroke-width="2" stroke-linejoin="round">
+            <path fill="rgba(233,178,61,.18)" d="M60 75 C39 75 23 68 18 56 C35 55 50 61 60 75Z"/>
+            <path fill="rgba(233,178,61,.16)" d="M60 75 C81 75 97 68 102 56 C85 55 70 61 60 75Z"/>
+            <path fill="rgba(233,178,61,.14)" d="M60 73 C43 58 39 39 47 25 C59 37 62 55 60 73Z"/>
+            <path fill="rgba(233,178,61,.14)" d="M60 73 C77 58 81 39 73 25 C61 37 58 55 60 73Z"/>
+            <path fill="rgba(233,178,61,.12)" d="M60 71 C53 53 55 31 60 17 C65 31 67 53 60 71Z"/>
+            <path d="M25 76 Q60 82 95 76"/>
+          </g>
+        </svg>
+      </div><h1 class="mand-title">Một lời bình an</h1><p class="mand-sub">09 · 02 · 2026</p></div></div>
+
+  <main class="card">
+    <span class="eyebrow">Một điều bình an gửi đến Qiyn</span>
+
+    <div class="bear-wrap">
+      <div class="aura" aria-hidden="true"></div>
+      <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gấu bông ôm hoa sen">
+        <defs>
+          <linearGradient id="furGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F3DBB4"/>
+            <stop offset="100%" stop-color="#DCB37E"/>
+          </linearGradient>
+          <radialGradient id="lotusGrad" cx="50%" cy="35%" r="75%">
+            <stop offset="0%" stop-color="#FCEBDA"/>
+            <stop offset="55%" stop-color="#EFAFA8"/>
+            <stop offset="100%" stop-color="#C97E86"/>
+          </radialGradient>
+        <linearGradient id="petalPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFF5ED"/><stop offset="35%" stop-color="#F5C6C5"/><stop offset="75%" stop-color="#DF929C"/><stop offset="100%" stop-color="#B96778"/></linearGradient><linearGradient id="petalShadow" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FBE8DF"/><stop offset="100%" stop-color="#C87584"/></linearGradient><linearGradient id="stemGrad"><stop offset="0%" stop-color="#58734A"/><stop offset="50%" stop-color="#78955A"/><stop offset="100%" stop-color="#3F5D3B"/></linearGradient><radialGradient id="goldCenter"><stop offset="0%" stop-color="#FFE9A5"/><stop offset="55%" stop-color="#E6AD3B"/><stop offset="100%" stop-color="#A86B25"/></radialGradient><filter id="softShadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="9" stdDeviation="7" flood-color="#5B1C28" flood-opacity=".24"/></filter>
+        </defs>
+
+        <!-- legs, crossed sitting pose -->
+        <ellipse cx="160" cy="272" rx="98" ry="40" fill="url(#furGrad)"/>
+        <ellipse cx="86" cy="280" rx="27" ry="17" fill="var(--fur-shade)"/>
+        <ellipse cx="234" cy="280" rx="27" ry="17" fill="var(--fur-shade)"/>
+        <ellipse cx="86" cy="280" rx="14" ry="9" fill="#F3DBB4"/>
+        <ellipse cx="234" cy="280" rx="14" ry="9" fill="#F3DBB4"/>
+
+        <!-- body -->
+        <ellipse cx="160" cy="206" rx="74" ry="66" fill="url(#furGrad)"/>
+        <!-- tummy -->
+        <ellipse cx="160" cy="214" rx="42" ry="40" fill="#FBF2DE"/>
+
+        <!-- diagonal lotus stem + leaf -->
+        <path d="M105 252 Q151 233 225 137" fill="none" stroke="#304B34" stroke-width="7" stroke-linecap="round" opacity=".28"/>
+        <path d="M105 248 Q151 229 225 132" fill="none" stroke="url(#stemGrad)" stroke-width="4.8" stroke-linecap="round"/>
+        <path d="M151 193 C127 176 104 178 92 193 C113 207 136 207 151 193Z" fill="#6F8E58" stroke="#466541" stroke-width="1.6"/>
+        <path d="M96 193 Q121 193 146 194" fill="none" stroke="#A6BA7D" stroke-width="1.3" opacity=".8"/>
+
+        <!-- natural-looking lotus flower -->
+        <g transform="translate(226 132)" filter="url(#softShadow)">
+          <path d="M0 34 C-27 28 -45 11 -43 -9 C-22 -4 -7 10 0 34Z" fill="url(#petalShadow)"/>
+          <path d="M0 34 C27 28 45 11 43 -9 C22 -4 7 10 0 34Z" fill="url(#petalShadow)"/>
+          <path d="M0 34 C-35 18 -51 -2 -45 -21 C-22 -17 -6 4 0 34Z" fill="url(#petalPink)"/>
+          <path d="M0 34 C35 18 51 -2 45 -21 C22 -17 6 4 0 34Z" fill="url(#petalPink)"/>
+          <path d="M0 31 C-23 13 -28 -15 -15 -35 C-1 -22 3 5 0 31Z" fill="url(#petalPink)"/>
+          <path d="M0 31 C23 13 28 -15 15 -35 C1 -22 -3 5 0 31Z" fill="url(#petalPink)"/>
+          <path d="M0 31 C-11 8 -10 -21 0 -42 C10 -21 11 8 0 31Z" fill="url(#petalPink)"/>
+          <path d="M-2 29 Q-12 6 -9 -25 M2 29 Q12 6 9 -25 M0 28 L0 -32" fill="none" stroke="#C87B87" stroke-width="1.2" opacity=".5"/>
+          <ellipse cx="0" cy="27" rx="12" ry="8" fill="url(#goldCenter)"/>
+          <g fill="#FFF0A8" opacity=".9"><circle cx="-6" cy="25" r="1.3"/><circle cx="0" cy="23" r="1.3"/><circle cx="6" cy="25" r="1.3"/><circle cx="-3" cy="29" r="1.2"/><circle cx="3" cy="29" r="1.2"/></g>
+        </g>
+
+        <!-- paws hold the diagonal stem -->
+        <path d="M105 190 Q82 208 94 236 Q104 252 122 244 Q128 237 119 225 Q110 211 125 199Z" fill="url(#furGrad)" stroke="#C18E5D" stroke-width="1.4"/>
+        <path d="M213 183 Q236 195 229 220 Q224 239 205 242 Q193 239 199 228 Q211 211 196 198Z" fill="url(#furGrad)" stroke="#C18E5D" stroke-width="1.4"/>
+        <ellipse cx="117" cy="234" rx="11" ry="9" fill="#F1D3AA" transform="rotate(-28 117 234)"/>
+        <ellipse cx="199" cy="211" rx="11" ry="9" fill="#F1D3AA" transform="rotate(-28 199 211)"/>
+
+        <!-- ears -->
+        <circle cx="110" cy="94" r="27" fill="url(#furGrad)"/>
+        <circle cx="210" cy="94" r="27" fill="url(#furGrad)"/>
+        <circle cx="110" cy="94" r="13" fill="#C97E86" opacity="0.5"/>
+        <circle cx="210" cy="94" r="13" fill="#C97E86" opacity="0.5"/>
+
+        <!-- head -->
+        <circle cx="160" cy="130" r="63" fill="url(#furGrad)"/>
+
+        <!-- muzzle -->
+        <ellipse cx="160" cy="148" rx="35" ry="27" fill="#FBF2DE"/>
+
+        <!-- closed, peaceful eyes -->
+        <path d="M125,119 Q136,108 147,119" stroke="#5A3327" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+        <path d="M173,119 Q184,108 195,119" stroke="#5A3327" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+
+        <!-- nose -->
+        <ellipse cx="160" cy="142" rx="7.5" ry="5.5" fill="#5A3327"/>
+
+        <!-- gentle smile -->
+        <path d="M160,148 Q160,158 149,160" stroke="#5A3327" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M160,148 Q160,158 171,160" stroke="#5A3327" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- blush -->
+        <ellipse cx="128" cy="149" rx="10" ry="6" fill="#E8A0A6" opacity="0.55"/>
+        <ellipse cx="192" cy="149" rx="10" ry="6" fill="#E8A0A6" opacity="0.55"/>
+      </svg>
+    </div>
+
+    <p class="message">Mừng Quốc khánh 2/9 &amp; Chúc Qiyn có kỳ nghỉ lễ trọn vẹn, bước vào Lớp 10 thật an yên, tràn đầy năng lượng.</p>
+
+    <button class="cta" id="drawBtn" type="button">Rút quẻ bình an Lớp 10</button>
+
+    <div class="quote-box" id="quoteBox">
+      <p id="quoteText" aria-live="polite"></p>
+    </div>
+
+    <p class="footer">Từ Đồng Tháp gửi Phú Yên - Kỷ niệm 17/7/2026</p>
+  </main>
+
+  <div id="petal-field" aria-hidden="true"></div>
+
+  <script>
+    const mandIntro = document.getElementById('mand-intro');
+    window.addEventListener('load', () => setTimeout(() => mandIntro.classList.add('hide'), 1550));
+
+    const quotes = [
+      "Nguyện tâm con luôn an như mặt hồ tĩnh lặng, đón năm học mới thật nhẹ nhàng và vững vàng.",
+      "Như hoa sen vươn lên từ bùn mà không nhiễm bùn, chúc Qiyn giữ mãi sự trong trẻo và bình yên trong lòng.",
+      "Chúc những kỳ thi Lớp 10 trôi qua nhẹ nhàng như một hơi thở sâu, đầu óc sáng suốt, tay viết vững vàng.",
+      "Mong con luôn nhớ: chậm mà chắc, an mà vững, mọi bài học rồi sẽ qua.",
+      "Chúc Qiyn một năm học mới đầy năng lượng, gặp thầy cô hiền, bạn bè tốt, chuyện học hành hanh thông.",
+      "Nguyện bình an theo con mỗi bước chân đến trường, mỗi đêm ôn bài đều có giấc ngủ ngon.",
+      "Như ánh nến trong đêm tĩnh lặng, mong tâm con luôn sáng và an giữa những ngày bận rộn.",
+      "Chúc con thi cử thuận lợi, điểm số như ý, và luôn giữ được nụ cười nhẹ nhàng quen thuộc.",
+      "Mong mọi lo âu tan như sương sớm, chỉ còn lại sự tự tin bước vào năm học mới.",
+      "Chúc Qiyn luôn nhớ hít thở sâu mỗi khi căng thẳng, vì bình an luôn ở ngay trong con.",
+      "Như gấu bông ôm ấp giấc mơ, mong năm Lớp 10 ôm trọn những điều tốt đẹp nhất đến với con.",
+      "Chúc con học hành tấn tới, trí tuệ khai mở, mọi điều mong ước đều thành.",
+      "Nguyện những ngày tới của con nhẹ như mây, vững như núi, an như sen nở.",
+      "Chúc Qiyn giữ mãi sự hiền lành, tốt bụng, và luôn được mọi điều tốt lành tìm đến.",
+      "Một năm học mới an lành, một tâm hồn bình yên, một Qiyn luôn rạng rỡ."
+    ];
+
+    const btn = document.getElementById('drawBtn');
+    const quoteBox = document.getElementById('quoteBox');
+    const quoteText = document.getElementById('quoteText');
+    const petalField = document.getElementById('petal-field');
+    let lastIndex = -1;
+
+    function prefersReducedMotion(){
+      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function pickQuote(){
+      if(quotes.length === 1) return quotes[0];
+      let idx;
+      do { idx = Math.floor(Math.random() * quotes.length); } while(idx === lastIndex);
+      lastIndex = idx;
+      return quotes[idx];
+    }
+
+    function spawnPetals(){
+      const total = 24;
+      for(let i = 0; i < total; i++){
+        setTimeout(() => {
+          const isSpark = Math.random() < 0.32;
+          const el = document.createElement('div');
+          el.className = isSpark ? 'spark' : 'petal';
+
+          const startX = Math.random() * 100;
+          const drift = (Math.random() * 90 - 45).toFixed(0) + 'px';
+          const spin = (Math.random() * 360).toFixed(0) + 'deg';
+          const duration = (3.4 + Math.random() * 2.2).toFixed(2) + 's';
+
+          el.style.left = startX + 'vw';
+          el.style.setProperty('--drift', drift);
+          el.style.setProperty('--spin', spin);
+          el.style.animationDuration = duration;
+
+          if(isSpark){
+            const s = 4 + Math.random() * 4;
+            el.style.width = s + 'px';
+            el.style.height = s + 'px';
+          } else {
+            const w = 10 + Math.random() * 7;
+            el.style.width = w + 'px';
+            el.style.height = (w * 1.35) + 'px';
+          }
+
+          petalField.appendChild(el);
+          el.addEventListener('animationend', () => el.remove());
+        }, i * 55);
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      quoteText.textContent = pickQuote();
+      quoteBox.classList.add('show');
+      if(!prefersReducedMotion()){
+        spawnPetals();
+      }
+    });
+  </script>
+
+</body>
+</html>
