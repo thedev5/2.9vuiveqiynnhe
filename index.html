@@ -27,7 +27,7 @@
 
   html,body{
     margin:0;
- w   padding:0;
+    padding:0;
     min-height:100vh;
   }
 
@@ -109,6 +109,50 @@
   @keyframes breathe{
     0%,100%{ transform:scale(1); opacity:0.65; }
     50%{ transform:scale(1.09); opacity:1; }
+  }
+
+  .hug-motion{
+    transform-origin:150px 226px;
+    animation:hugSway 4.6s ease-in-out infinite;
+  }
+
+  @keyframes hugSway{
+    0%,100%{ transform:rotate(0deg) translateY(0); }
+    50%{ transform:rotate(-1.6deg) translateY(-2.5px); }
+  }
+
+  .mand-loading{
+    display:flex;
+    gap:7px;
+    justify-content:center;
+    margin-top:20px;
+  }
+
+  .mand-loading span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold-light);
+    opacity:.35;
+    animation:dotPulse 1.2s ease-in-out infinite;
+  }
+
+  .mand-loading span:nth-child(2){ animation-delay:.15s; }
+  .mand-loading span:nth-child(3){ animation-delay:.3s; }
+
+  @keyframes dotPulse{
+    0%,80%,100%{ transform:scale(0.6); opacity:.35; }
+    40%{ transform:scale(1); opacity:1; }
+  }
+
+  .reveal{
+    opacity:0;
+    animation:revealUp 0.9s cubic-bezier(.22,.68,.32,1) forwards;
+  }
+
+  @keyframes revealUp{
+    from{ opacity:0; transform:translateY(24px); }
+    to{ opacity:1; transform:translateY(0); }
   }
 
   .message{
@@ -243,6 +287,9 @@
     .aura{ animation:none; opacity:0.75; }
     .cta{ transition:none; }
     .petal,.spark{ animation:none; display:none; }
+    .hug-motion{ animation:none; }
+    .mand-loading span{ animation:none; opacity:.7; }
+    .reveal{ animation:none; opacity:1; transform:none; }
   }
 
   @media (max-width:360px){
@@ -268,12 +315,12 @@
             <path d="M25 76 Q60 82 95 76"/>
           </g>
         </svg>
-      </div><h1 class="mand-title">Một lời bình an</h1><p class="mand-sub">09 · 02 · 2026</p></div></div>
+      </div><h1 class="mand-title">Một lời bình an</h1><p class="mand-sub">09 · 02 · 2026</p><div class="mand-loading" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
 
   <main class="card">
-    <span class="eyebrow">Một điều bình an gửi đến Qiyn</span>
+    <span class="eyebrow reveal" style="animation-delay:1.6s">Một điều bình an gửi đến Qiyn</span>
 
-    <div class="bear-wrap">
+    <div class="bear-wrap reveal" style="animation-delay:1.75s">
       <div class="aura" aria-hidden="true"></div>
       <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gấu bông ôm hoa sen">
         <defs>
@@ -301,32 +348,6 @@
         <!-- tummy -->
         <ellipse cx="160" cy="214" rx="42" ry="40" fill="#FBF2DE"/>
 
-        <!-- diagonal lotus stem + leaf -->
-        <path d="M105 252 Q151 233 225 137" fill="none" stroke="#304B34" stroke-width="7" stroke-linecap="round" opacity=".28"/>
-        <path d="M105 248 Q151 229 225 132" fill="none" stroke="url(#stemGrad)" stroke-width="4.8" stroke-linecap="round"/>
-        <path d="M151 193 C127 176 104 178 92 193 C113 207 136 207 151 193Z" fill="#6F8E58" stroke="#466541" stroke-width="1.6"/>
-        <path d="M96 193 Q121 193 146 194" fill="none" stroke="#A6BA7D" stroke-width="1.3" opacity=".8"/>
-
-        <!-- natural-looking lotus flower -->
-        <g transform="translate(226 132)" filter="url(#softShadow)">
-          <path d="M0 34 C-27 28 -45 11 -43 -9 C-22 -4 -7 10 0 34Z" fill="url(#petalShadow)"/>
-          <path d="M0 34 C27 28 45 11 43 -9 C22 -4 7 10 0 34Z" fill="url(#petalShadow)"/>
-          <path d="M0 34 C-35 18 -51 -2 -45 -21 C-22 -17 -6 4 0 34Z" fill="url(#petalPink)"/>
-          <path d="M0 34 C35 18 51 -2 45 -21 C22 -17 6 4 0 34Z" fill="url(#petalPink)"/>
-          <path d="M0 31 C-23 13 -28 -15 -15 -35 C-1 -22 3 5 0 31Z" fill="url(#petalPink)"/>
-          <path d="M0 31 C23 13 28 -15 15 -35 C1 -22 -3 5 0 31Z" fill="url(#petalPink)"/>
-          <path d="M0 31 C-11 8 -10 -21 0 -42 C10 -21 11 8 0 31Z" fill="url(#petalPink)"/>
-          <path d="M-2 29 Q-12 6 -9 -25 M2 29 Q12 6 9 -25 M0 28 L0 -32" fill="none" stroke="#C87B87" stroke-width="1.2" opacity=".5"/>
-          <ellipse cx="0" cy="27" rx="12" ry="8" fill="url(#goldCenter)"/>
-          <g fill="#FFF0A8" opacity=".9"><circle cx="-6" cy="25" r="1.3"/><circle cx="0" cy="23" r="1.3"/><circle cx="6" cy="25" r="1.3"/><circle cx="-3" cy="29" r="1.2"/><circle cx="3" cy="29" r="1.2"/></g>
-        </g>
-
-        <!-- paws hold the diagonal stem -->
-        <path d="M105 190 Q82 208 94 236 Q104 252 122 244 Q128 237 119 225 Q110 211 125 199Z" fill="url(#furGrad)" stroke="#C18E5D" stroke-width="1.4"/>
-        <path d="M213 183 Q236 195 229 220 Q224 239 205 242 Q193 239 199 228 Q211 211 196 198Z" fill="url(#furGrad)" stroke="#C18E5D" stroke-width="1.4"/>
-        <ellipse cx="117" cy="234" rx="11" ry="9" fill="#F1D3AA" transform="rotate(-28 117 234)"/>
-        <ellipse cx="199" cy="211" rx="11" ry="9" fill="#F1D3AA" transform="rotate(-28 199 211)"/>
-
         <!-- ears -->
         <circle cx="110" cy="94" r="27" fill="url(#furGrad)"/>
         <circle cx="210" cy="94" r="27" fill="url(#furGrad)"/>
@@ -353,18 +374,48 @@
         <!-- blush -->
         <ellipse cx="128" cy="149" rx="10" ry="6" fill="#E8A0A6" opacity="0.55"/>
         <ellipse cx="192" cy="149" rx="10" ry="6" fill="#E8A0A6" opacity="0.55"/>
+
+        <!-- diagonal lotus stem, leaf and flower, lowered so the head never covers it, gently swaying like a hug -->
+        <g class="hug-motion">
+          <path d="M105 252 Q148 238 222 186" fill="none" stroke="#304B34" stroke-width="7" stroke-linecap="round" opacity=".28"/>
+          <path d="M105 248 Q148 234 222 181" fill="none" stroke="url(#stemGrad)" stroke-width="4.8" stroke-linecap="round"/>
+          <g transform="translate(-20 44) rotate(-10 151 193)">
+            <path d="M151 193 C127 176 104 178 92 193 C113 207 136 207 151 193Z" fill="#6F8E58" stroke="#466541" stroke-width="1.6"/>
+            <path d="M96 193 Q121 193 146 194" fill="none" stroke="#A6BA7D" stroke-width="1.3" opacity=".8"/>
+          </g>
+
+          <!-- natural-looking lotus flower, lowered clear of the ear/head -->
+          <g transform="translate(224 182)" filter="url(#softShadow)">
+            <path d="M0 34 C-27 28 -45 11 -43 -9 C-22 -4 -7 10 0 34Z" fill="url(#petalShadow)"/>
+            <path d="M0 34 C27 28 45 11 43 -9 C22 -4 7 10 0 34Z" fill="url(#petalShadow)"/>
+            <path d="M0 34 C-35 18 -51 -2 -45 -21 C-22 -17 -6 4 0 34Z" fill="url(#petalPink)"/>
+            <path d="M0 34 C35 18 51 -2 45 -21 C22 -17 6 4 0 34Z" fill="url(#petalPink)"/>
+            <path d="M0 31 C-23 13 -28 -15 -15 -35 C-1 -22 3 5 0 31Z" fill="url(#petalPink)"/>
+            <path d="M0 31 C23 13 28 -15 15 -35 C1 -22 -3 5 0 31Z" fill="url(#petalPink)"/>
+            <path d="M0 31 C-11 8 -10 -21 0 -42 C10 -21 11 8 0 31Z" fill="url(#petalPink)"/>
+            <path d="M-2 29 Q-12 6 -9 -25 M2 29 Q12 6 9 -25 M0 28 L0 -32" fill="none" stroke="#C87B87" stroke-width="1.2" opacity=".5"/>
+            <ellipse cx="0" cy="27" rx="12" ry="8" fill="url(#goldCenter)"/>
+            <g fill="#FFF0A8" opacity=".9"><circle cx="-6" cy="25" r="1.3"/><circle cx="0" cy="23" r="1.3"/><circle cx="6" cy="25" r="1.3"/><circle cx="-3" cy="29" r="1.2"/><circle cx="3" cy="29" r="1.2"/></g>
+          </g>
+
+          <!-- paws hold the diagonal stem -->
+          <path d="M105 190 Q82 208 94 236 Q104 252 122 244 Q128 237 119 225 Q110 211 125 199Z" fill="url(#furGrad)" stroke="#C18E5D" stroke-width="1.4"/>
+          <path d="M213 183 Q236 195 229 220 Q224 239 205 242 Q193 239 199 228 Q211 211 196 198Z" fill="url(#furGrad)" stroke="#C18E5D" stroke-width="1.4"/>
+          <ellipse cx="117" cy="234" rx="11" ry="9" fill="#F1D3AA" transform="rotate(-28 117 234)"/>
+          <ellipse cx="199" cy="211" rx="11" ry="9" fill="#F1D3AA" transform="rotate(-28 199 211)"/>
+        </g>
       </svg>
     </div>
 
-    <p class="message">Mừng Quốc khánh 2/9 &amp; Chúc Qiyn có kỳ nghỉ lễ trọn vẹn, bước vào Lớp 10 thật an yên, tràn đầy năng lượng.</p>
+    <p class="message reveal" style="animation-delay:1.9s">Mừng Quốc khánh 2/9 &amp; Chúc Qiyn có kỳ nghỉ lễ trọn vẹn, bước vào Lớp 10 thật an yên, tràn đầy năng lượng.</p>
 
-    <button class="cta" id="drawBtn" type="button">Rút quẻ bình an Lớp 10</button>
+    <button class="cta reveal" id="drawBtn" type="button" style="animation-delay:2.05s">Rút quẻ bình an Lớp 10</button>
 
     <div class="quote-box" id="quoteBox">
       <p id="quoteText" aria-live="polite"></p>
     </div>
 
-    <p class="footer">Từ Đồng Tháp gửi Phú Yên - Kỷ niệm 17/7/2026</p>
+    <p class="footer reveal" style="animation-delay:2.2s">Từ Đồng Tháp gửi Phú Yên - Kỷ niệm 17/7/2026</p>
   </main>
 
   <div id="petal-field" aria-hidden="true"></div>
